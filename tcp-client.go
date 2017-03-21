@@ -1,23 +1,25 @@
 package main
 
-import "net"
-import "fmt"
-import "bufio"
-import "os"
+import (
+    "fmt"
+    "log"
+    "net"
+    "encoding/gob"
+)
+
+type P struct {
+    M, N int64
+}
 
 func main() {
-
-  // connect to this socket
-  conn, _ := net.Dial("tcp", "127.0.0.1:8081")
-  for { 
-    // read in input from stdin
-    reader := bufio.NewReader(os.Stdin)
-    fmt.Print("Text to send: ")
-    text, _ := reader.ReadString('\n')
-    // send to socket
-    fmt.Fprintf(conn, text + "\n")
-    // listen for reply
-    message, _ := bufio.NewReader(conn).ReadString('\n')
-    fmt.Print("Message from server: "+message)
-  }
+    fmt.Println("start client");
+    conn, err := net.Dial("tcp", "localhost:8080")
+    if err != nil {
+        log.Fatal("Connection error", err)
+    }
+    encoder := gob.NewEncoder(conn)
+    p := &P{1, 2}
+    encoder.Encode(p)
+    conn.Close()
+    fmt.Println("done");
 }
