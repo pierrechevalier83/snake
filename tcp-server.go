@@ -5,15 +5,14 @@ import (
     "net"
     "encoding/gob"
 )
-
 type P struct {
-    M, N int64
+     int64
 }
 func handleConnection(conn net.Conn) {
     dec := gob.NewDecoder(conn)
     p := &P{}
     dec.Decode(p)
-    fmt.Printf("Received : %+v", p);
+    fmt.Printf("Received : %+v", &p);
     conn.Close()
 }
 
