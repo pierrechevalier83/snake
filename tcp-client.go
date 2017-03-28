@@ -10,8 +10,8 @@
 	type P struct{N,M string}
 
 	func main() {
-		fmt.Println("start client at localhost:8080");
-		conn, err := net.Dial("tcp", "localhost:8080")
+		fmt.Println("start client at localhost:5005");
+		conn, err := net.Dial("tcp", "localhost:5005")
 		if err != nil 	{ 
 			log.Fatal("Connection error", err)
 						}

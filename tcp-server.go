@@ -20,8 +20,8 @@ func handleConnection(conn net.Conn) {
 }
 
 func main() {
-    fmt.Println("start server at localhost:8080 ");
-   ln, err := net.Listen("tcp", ":8080")
+    fmt.Println("start server at localhost:5005 ");
+   ln, err := net.Listen("tcp", ":5005")
     if err != nil {
         // handle error
     }
