@@ -10,9 +10,9 @@
 	type P struct{N,M string}
 
 	func main() {
-		fmt.Println("start client");
+		fmt.Println("start client at localhost:8080");
 		conn, err := net.Dial("tcp", "localhost:8080")
-		if err != nil 	{
+		if err != nil 	{ 
 			log.Fatal("Connection error", err)
 						}
 		encoder := gob.NewEncoder(conn)
@@ -22,4 +22,4 @@
 		fmt.Println("N =",p.N);
 		conn.Close()
 		fmt.Println("Values sent to server");
-				}
+				} 
