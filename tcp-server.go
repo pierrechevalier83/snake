@@ -3,14 +3,14 @@ package main
 import (
     "fmt"
     "net"
-    "encoding/gob"
+    "encoding/json"
 )
 type P struct {
      N,M string
 }
 
 func handleConnection(conn net.Conn) {
-    dec := gob.NewDecoder(conn)
+    dec := json.NewDecoder(conn)
     a := &P{}
     dec.Decode(a)
 	fmt.Println("Values received from client");

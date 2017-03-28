@@ -4,10 +4,12 @@
 		"fmt"
 		"log"
 		"net"
-		"encoding/gob"
+		"encoding/json"
 			)
 
-	type P struct{N,M string}
+	type Message struct {
+		Value string
+	}
 
 	func main() {
 		fmt.Println("start client at localhost:5005");
@@ -15,11 +17,11 @@
 		if err != nil 	{ 
 			log.Fatal("Connection error", err)
 						}
-		encoder := gob.NewEncoder(conn)
-		p := P{"1","2"}
-		encoder.Encode(p)
-		fmt.Println("M =",p.M);
-		fmt.Println("N =",p.N);
+		encoder := json.NewEncoder(conn)
+		const jsonStream = `{"Value": "42"}`
+		encoder.Encode(jsonStream)
+		fmt.Println("jsonStream=",jsonStream);
 		conn.Close()
 		fmt.Println("Values sent to server");
 				} 
+				
