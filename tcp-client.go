@@ -7,9 +7,8 @@ import (
     "net"
 )
 
-type Person struct {  
-    FirstName string `json:"firstName"`
-    LastName  string `json:"lastName"`
+type Message struct {  
+    Value string `json:"Value"`
 }
 
 func main() {  
@@ -19,7 +18,7 @@ func main() {
 			log.Fatal("Connection error", err)
 						}
 		encoder := json.NewEncoder(conn)
-    in := `{"firstName":"John","lastName":"Dow"}`
+    in := `{"Value":"42"}`
 
     rawIn := json.RawMessage(in)
     bytes, err := rawIn.MarshalJSON()
@@ -27,7 +26,7 @@ func main() {
         panic(err)
     }
 
-    var p Person
+    var p Message
     err = json.Unmarshal(bytes, &p)
     if err != nil {
         panic(err)

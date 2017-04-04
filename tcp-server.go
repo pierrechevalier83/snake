@@ -5,17 +5,16 @@ import (
     "net"
     "encoding/json"
 )
-type Person struct {  
-    FirstName string `json:"firstName"`
-    LastName  string `json:"lastName"`
+type Message struct {  
+    Value string `json:"Value"`
 }
 
 func handleConnection(conn net.Conn) {
     dec := json.NewDecoder(conn)
-    a := &Person{}
+    a := &Message{}
     dec.Decode(a)
 	fmt.Println("Values received from client");
-    fmt.Println("N =",a.FirstName);
+    fmt.Println("Value =",a.Value);
     conn.Close()
 }
 
