@@ -5,22 +5,22 @@ import (
     "net"
     "encoding/json"
 )
-type P struct {
-     N,M string
+type Person struct {  
+    FirstName string `json:"firstName"`
+    LastName  string `json:"lastName"`
 }
 
 func handleConnection(conn net.Conn) {
     dec := json.NewDecoder(conn)
-    a := &P{}
+    a := &Person{}
     dec.Decode(a)
 	fmt.Println("Values received from client");
-    fmt.Println("M =",a.M);
-	fmt.Println("N =",a.N);
+    fmt.Println("N =",a.FirstName);
     conn.Close()
 }
 
 func main() {
-    fmt.Println("start server at localhost:5005 ");
+    fmt.Println("start");
    ln, err := net.Listen("tcp", ":5005")
     if err != nil {
         // handle error
